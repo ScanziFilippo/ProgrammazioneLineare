@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Fh7AH2wBr9sL8wVTxFNaUPVhZk6GWfe/gHaCv51moz/pD3iVSeyxT+2bn+mpa7Nxoa0+hmLRzt81y8/OqsMvrQ==",
+  "dgSpecHash": "nsHGyeFluC3lSizbi2yoYH/xNLwqGSz2rljBQ206sZ1JOBziW9ZwtaIfJEctKkFGmQzNV52szGAsA2Y/pzrtrQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\scanzi.19041\\source\\repos\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare.csproj",
+  "projectFilePath": "C:\\Users\\scanzi.19041\\Documents\\GitHub\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\scanzi.19041\\.nuget\\packages\\blurrycontrols\\1.0.24\\blurrycontrols.1.0.24.nupkg.sha512",
     "C:\\Users\\scanzi.19041\\.nuget\\packages\\fluentwpf\\0.10.2\\fluentwpf.0.10.2.nupkg.sha512"

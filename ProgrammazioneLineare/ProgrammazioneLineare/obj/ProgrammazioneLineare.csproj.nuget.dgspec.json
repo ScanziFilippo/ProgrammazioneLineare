@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\scanzi.19041\\source\\repos\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare.csproj": {}
+    "C:\\Users\\scanzi.19041\\Documents\\GitHub\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare.csproj": {}
   },
   "projects": {
-    "C:\\Users\\scanzi.19041\\source\\repos\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare.csproj": {
+    "C:\\Users\\scanzi.19041\\Documents\\GitHub\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\scanzi.19041\\source\\repos\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare.csproj",
+        "projectUniqueName": "C:\\Users\\scanzi.19041\\Documents\\GitHub\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare.csproj",
         "projectName": "ProgrammazioneLineare",
-        "projectPath": "C:\\Users\\scanzi.19041\\source\\repos\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare.csproj",
+        "projectPath": "C:\\Users\\scanzi.19041\\Documents\\GitHub\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare.csproj",
         "packagesPath": "C:\\Users\\scanzi.19041\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\scanzi.19041\\source\\repos\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\obj\\",
+        "outputPath": "C:\\Users\\scanzi.19041\\Documents\\GitHub\\ProgrammazioneLineare\\ProgrammazioneLineare\\ProgrammazioneLineare\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
