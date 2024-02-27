@@ -32,5 +32,10 @@ namespace ProgrammazioneLineare
         {
             BlurryMessageBox.Show(this, "Contenuto contenutoso", "Titolo");
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Tabella.Items.Add("Ciao");
+        }
     }
 }
