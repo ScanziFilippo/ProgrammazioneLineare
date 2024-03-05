@@ -14,6 +14,7 @@
                        WindowStartupLocation="CenterScreen"
                        Title="Programmazione Lineare" Strength="0" WindowStyle="None" Background="Black">
     <Grid fw:PointerTracker.Enabled="True" Background="#01FFFFFF" Margin="3">
+        <!--
         <StackPanel>
             <Button Content="Button" HorizontalAlignment="Left" Margin="5" Width="75" Height="32"
                 Style="{StaticResource ButtonRevealStyle}"/>
@@ -24,9 +25,24 @@
 
             <TextBox HorizontalAlignment="Left" Height="35" Margin="5" Text="TextBox" Width="125"
              Style="{StaticResource TextBoxRevealStyle}"/>
-            <DataGrid x:Name="Tabella" Height="175" Width="608" AutoGenerateColumns="False" IsReadOnly="False">
+            
+            <DockPanel Height="100" LastChildFill="False"/>
+        </StackPanel>
+        -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0"></StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <Button Content="Button" Width="76" Height="32"
+                Style="{StaticResource ButtonRevealStyle}" Click="Button_Click_1"/>
+            <DataGrid x:Name="Tabella" AutoGenerateColumns="False" IsReadOnly="False" Padding="50,50,50,50" BorderBrush="{x:Null}">
                 <DataGrid.Background>
-                    <SolidColorBrush Color="#FFF0F0F0" Opacity="0.5"/>
+                    <SolidColorBrush Color="Transparent" Opacity="0.5"/>
                 </DataGrid.Background>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Oggetti" MinWidth="300"/>
@@ -35,8 +51,6 @@
                 </DataGrid.Columns>
                 <DataGrid.Items></DataGrid.Items>
             </DataGrid>
-            <Button Content="Button" Width="76" Height="32"
-                Style="{StaticResource ButtonRevealStyle}" HorizontalAlignment="Center" Click="Button_Click_1"/>
         </StackPanel>
     </Grid>
 </controls:BlurryWindow>
