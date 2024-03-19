@@ -23,9 +23,20 @@ namespace ProgrammazioneLineare
     /// </summary>
     public partial class MainWindow
     {
+        //private static object _syncLock = new object();
+        List<Oggetto> oggetti;
         public MainWindow()
         {
             InitializeComponent();
+            oggetti = new List<Oggetto>();
+            oggetti.Add(new Oggetto() { Nome = "Ghiaccio", X = 1, Y = 2 , Limite_Massimo = 10});
+            //BindingOperations.EnableCollectionSynchronization(oggetti, _syncLock);
+            Tabella.ItemsSource= LoadCollectionData();
+            Rette.Text = "ax + bx + c\nax + bx + c\nax + bx + c\nax + bx + c\nax + bx + c\n";
+        }
+        private List<Oggetto> LoadCollectionData()
+        {
+            return oggetti;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,7 +46,20 @@ namespace ProgrammazioneLineare
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Tabella.Items.Add("Ciao");
+            //Tabella.Items.Add("Ciao");
+            oggetti.Add(new Oggetto());
+            Tabella.InvalidateVisual();
+            Console.WriteLine(oggetti.Count);
         }
+    }
+    public class Oggetto
+    {
+        public string Nome { get; set; }
+
+        public double X { get; set; }
+
+        public double Y { get; set; }
+
+        public double Limite_Massimo { get; set; }
     }
 }

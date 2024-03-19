@@ -1,0 +1,11 @@
+is_global = true
+build_property.TargetFramework = net6.0-windows
+build_property.TargetPlatformMinVersion = 7.0
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ProgrammazioneLineare_lpnax25z_wpftmp
+build_property.ProjectDir = C:\Users\scanzi.19041\Documents\GitHub\ProgrammazioneLineare\ProgrammazioneLineare\ProgrammazioneLineare\
