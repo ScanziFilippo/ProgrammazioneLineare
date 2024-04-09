@@ -49,3 +49,5 @@ C:\Users\scanzi.19041\Documents\GitHub\ProgrammazioneLineare\ProgrammazioneLinea
 C:\Users\scanzi.19041\Documents\GitHub\ProgrammazioneLineare\ProgrammazioneLineare\ProgrammazioneLineare\obj\Debug\net6.0-windows\ProgrammazioneLineare.pdb
 C:\Users\scanzi.19041\Documents\GitHub\ProgrammazioneLineare\ProgrammazioneLineare\ProgrammazioneLineare\obj\Debug\net6.0-windows\ProgrammazioneLineare.genruntimeconfig.cache
 C:\Users\scanzi.19041\Documents\GitHub\ProgrammazioneLineare\ProgrammazioneLineare\ProgrammazioneLineare\obj\Debug\net6.0-windows\ref\ProgrammazioneLineare.dll
+C:\Users\scanzi.19041\Documents\GitHub\ProgrammazioneLineare\ProgrammazioneLineare\ProgrammazioneLineare\obj\Debug\net6.0-windows\FinestraGrafico.g.cs
+C:\Users\scanzi.19041\Documents\GitHub\ProgrammazioneLineare\ProgrammazioneLineare\ProgrammazioneLineare\obj\Debug\net6.0-windows\FinestraGrafico.baml
