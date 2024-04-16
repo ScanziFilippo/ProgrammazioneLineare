@@ -23,5 +23,53 @@ namespace ProgrammazioneLineare
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ingrandisci(2);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            double fattore = 2;
+            double offsetX = 50;
+            double offsetY = 250;
+            for (int i = 0; i < grafico.Children.Count; i++)
+            {
+                try
+                {
+                    ((Line)grafico.Children[i]).X1 /= fattore;
+                    ((Line)grafico.Children[i]).X1 += offsetX;
+                    ((Line)grafico.Children[i]).Y1 /= fattore;
+                    ((Line)grafico.Children[i]).Y1 += offsetY;
+                    ((Line)grafico.Children[i]).X2 /= fattore;
+                    ((Line)grafico.Children[i]).X2 += offsetX;
+                    ((Line)grafico.Children[i]).Y2 /= fattore;
+                    ((Line)grafico.Children[i]).Y2 += offsetY;
+                }
+                catch { }
+            }
+        }
+        public void ingrandisci(double fattore)
+        {
+            //double fattore = 2;
+            double offsetX = (100 * fattore) - 100;
+            double offsetY = 500 * (fattore-1);
+            for (int i = 0; i < grafico.Children.Count; i++)
+            {
+                try
+                {
+                    ((Line)grafico.Children[i]).X1 *= fattore;
+                    ((Line)grafico.Children[i]).X1 -= offsetX;
+                    ((Line)grafico.Children[i]).Y1 *= fattore;
+                    ((Line)grafico.Children[i]).Y1 -= offsetY;
+                    ((Line)grafico.Children[i]).X2 *= fattore;
+                    ((Line)grafico.Children[i]).X2 -= offsetX;
+                    ((Line)grafico.Children[i]).Y2 *= fattore;
+                    ((Line)grafico.Children[i]).Y2 -= offsetY;
+                }
+                catch { }
+            }
+        }
     }
 }

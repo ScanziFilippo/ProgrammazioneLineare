@@ -71,9 +71,24 @@ namespace ProgrammazioneLineare
             }
             Rette.Text = stringa;
         }
-        private void mostraRetta(int x, int y, int k)
+        private void mostraRetta(double x, double y, double k)
         {
-            
+            double x1 = -100;
+            double y1 = (k - (x1 * x)) / y;
+            double x2 = 800;
+            double y2 = (k - (x2 * x))/y;
+            Line linea = new Line();
+            linea.X1 = x1 + 100;
+            linea.Y1 = -(y1 - 500);
+            linea.X2 = x2 + 100;
+            linea.Y2 = -(y2 - 500);
+            linea.Stroke = Brushes.Red;
+            linea.StrokeThickness = .5;
+            Console.WriteLine(linea.X1 + "\n");
+            Console.WriteLine(linea.X2 + "\n");
+            Console.WriteLine(linea.Y1 + "\n");
+            Console.WriteLine(linea.Y2+ "\n");
+            finestraGrafico.grafico.Children.Add(linea);
         }
 
         private void Tabella_KeyUp(object sender, KeyEventArgs e)
@@ -84,7 +99,7 @@ namespace ProgrammazioneLineare
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             finestraGrafico.Show();
-            for(int i = 0; i < 800; i += 20)
+            for(int i = 0; i < 800; i += 1)
             {
                 Line linea = new Line();
                 linea.X1 = i;
@@ -95,7 +110,7 @@ namespace ProgrammazioneLineare
                 linea.StrokeThickness = .5;
                 finestraGrafico.grafico.Children.Add(linea);
             }
-            for (int i = 0; i < 600; i += 20)
+            for (int i = 0; i < 600; i += 1)
             {
                 Line linea = new Line();
                 linea.X1 = 0;
@@ -106,7 +121,12 @@ namespace ProgrammazioneLineare
                 linea.StrokeThickness = .5;
                 finestraGrafico.grafico.Children.Add(linea);
             }
-            mostraRetta(0,0,0);
+            for(int i = 0; i < oggetti.Count; i += 1)
+            {
+                mostraRetta(oggetti[i].X, oggetti[i].Y, oggetti[i].Limite_Massimo);
+            }
+            //mostraRetta(1,2,10);
+            finestraGrafico.ingrandisci(20);
         }
 
         private void Finestra_Closed(object sender, EventArgs e)
