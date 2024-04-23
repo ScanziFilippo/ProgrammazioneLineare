@@ -41,19 +41,20 @@
             <Grid HorizontalAlignment="Center">
                 <!--<Button Content="Button" Width="76" Height="32"
                 Style="{StaticResource ButtonRevealStyle}" Click="Button_Click_1"/>-->
-                <DataGrid x:Name="Tabella" Width="250" AutoGenerateColumns="True" IsReadOnly="False" BorderBrush="{x:Null}" KeyUp="Tabella_KeyUp">
+                <!--<DataGrid x:Name="Tabella" Width="250" AutoGenerateColumns="True" IsReadOnly="False" BorderBrush="{x:Null}" KeyUp="Tabella_KeyUp">
                     <DataGrid.Background>
                         <SolidColorBrush Color="Transparent" Opacity="0.5"/>
                     </DataGrid.Background>
-                    <!--
+                    
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Oggetti" MinWidth="300"/>
                     <DataGridTextColumn Header="X"/>
                     <DataGridTextColumn Header="Y"/>
                 </DataGrid.Columns>
-                <DataGrid.Items></DataGrid.Items>-->
-                </DataGrid>
-                <TextBlock IsHitTestVisible="False" x:Name="Rette" Padding="500 0 0 0" HorizontalAlignment="Center" Text="Esempio"/>
+                <DataGrid.Items></DataGrid.Items>
+                </DataGrid>-->
+                <TextBox Width="500" Height="50" Background="#33FF0000" Foreground="White" AcceptsReturn="True" FontSize="15"/>
+                <!--<TextBlock IsHitTestVisible="False" x:Name="Rette" Padding="500 0 0 0" HorizontalAlignment="Center" Text="Esempio"/>-->
             </Grid>
             <ComboBox Margin="5" Text="TextBox" Width="120" Background="White">
                 <ComboBoxItem Content="Massimizza" IsSelected="True"/>

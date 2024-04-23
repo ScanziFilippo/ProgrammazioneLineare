@@ -61,7 +61,7 @@ namespace ProgrammazioneLineare {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProgrammazioneLineare;V1.0.0.0;component/finestragrafico.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProgrammazioneLineare;component/finestragrafico.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\FinestraGrafico.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

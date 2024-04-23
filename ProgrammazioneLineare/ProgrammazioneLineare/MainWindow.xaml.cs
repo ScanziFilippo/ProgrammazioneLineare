@@ -24,52 +24,22 @@ namespace ProgrammazioneLineare
     public partial class MainWindow
     {
         //private static object _syncLock = new object();
-        List<Oggetto> oggetti;
+        List<Retta> rette;
         FinestraGrafico finestraGrafico = new FinestraGrafico();
         public MainWindow()
         {
             InitializeComponent();
-            oggetti = new List<Oggetto>();
-            oggetti.Add(new Oggetto() { Nome = "Ghiaccio", X = 1, Y = 2 , Limite_Massimo = 10});
-            //BindingOperations.EnableCollectionSynchronization(oggetti, _syncLock);
-            Tabella.ItemsSource= LoadCollectionData();
-            Rette.FontSize= 15;
-            Rette.Text = "Equazioni delle rette";
-            aggiornaTestoRette();
-        //Rette.Text = "Equazioni delle rette\nax + bx + c\nax + bx + c\nax + bx + c\nax + bx + c\n";
-        //Rette.Visibility = Visibility.Collapsed;
-    }
-        private List<Oggetto> LoadCollectionData()
+            rette = new List<Retta>();
+            rette.Add(new Retta() { X = 1, Y = 2 , K = 10});
+        }
+        private List<Retta> LoadCollectionData()
         {
-            return oggetti;
+            return rette;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             BlurryMessageBox.Show(this, "Contenuto contenutoso", "Titolo");
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            //Tabella.Items.Add("Ciao");
-            oggetti.Add(new Oggetto());
-            Tabella.InvalidateVisual();
-            Console.WriteLine(oggetti.Count);
-        }
-
-        private void Tabella_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            aggiornaTestoRette();
-        }
-
-        private void aggiornaTestoRette()
-        {
-            String stringa = "Equazioni delle rette";
-            for (int i = 0; i < oggetti.Count; i++)
-            {
-                stringa += "\n" + oggetti[i].X.ToString() + " x  +  " + oggetti[i].Y.ToString() + " y  =  " + oggetti[i].Limite_Massimo.ToString();
-            }
-            Rette.Text = stringa;
         }
         private void mostraRetta(double x, double y, double k)
         {
@@ -89,11 +59,6 @@ namespace ProgrammazioneLineare
             Console.WriteLine(linea.Y1 + "\n");
             Console.WriteLine(linea.Y2+ "\n");
             finestraGrafico.grafico.Children.Add(linea);
-        }
-
-        private void Tabella_KeyUp(object sender, KeyEventArgs e)
-        {
-            aggiornaTestoRette();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -121,9 +86,9 @@ namespace ProgrammazioneLineare
                 linea.StrokeThickness = .5;
                 finestraGrafico.grafico.Children.Add(linea);
             }
-            for(int i = 0; i < oggetti.Count; i += 1)
+            for(int i = 0; i < rette.Count; i += 1)
             {
-                mostraRetta(oggetti[i].X, oggetti[i].Y, oggetti[i].Limite_Massimo);
+                mostraRetta(rette[i].X, rette[i].Y, rette[i].K);
             }
             //mostraRetta(1,2,10);
             finestraGrafico.ingrandisci(20);
@@ -134,14 +99,12 @@ namespace ProgrammazioneLineare
             System.Windows.Application.Current.Shutdown();
         }
     }
-    public class Oggetto
+    public class Retta
     {
-        public string Nome { get; set; }
-
         public double X { get; set; }
 
         public double Y { get; set; }
 
-        public double Limite_Massimo { get; set; }
+        public double K { get; set; }
     }
 }
