@@ -26,11 +26,14 @@ namespace ProgrammazioneLineare
         //private static object _syncLock = new object();
         List<Oggetto> oggetti;
         FinestraGrafico finestraGrafico = new FinestraGrafico();
+        bool graficoCaricato = false;
         public MainWindow()
         {
             InitializeComponent();
             oggetti = new List<Oggetto>();
             oggetti.Add(new Oggetto() { Nome = "Ghiaccio", X = 1, Y = 2 , Limite_Massimo = 10});
+            oggetti.Add(new Oggetto() { Nome = "Limone", X=5, Y = 3 , Limite_Massimo=7});
+            oggetti.Add(new Oggetto() { Nome = "Acqua", X=1, Y=0,Limite_Massimo=10});
             //BindingOperations.EnableCollectionSynchronization(oggetti, _syncLock);
             Tabella.ItemsSource= LoadCollectionData();
             Rette.FontSize= 15;
@@ -57,26 +60,35 @@ namespace ProgrammazioneLineare
             Console.WriteLine(oggetti.Count);
         }
 
-        private void Tabella_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            aggiornaTestoRette();
-        }
-
         private void aggiornaTestoRette()
         {
             String stringa = "Equazioni delle rette";
             for (int i = 0; i < oggetti.Count; i++)
             {
-                stringa += "\n" + oggetti[i].X.ToString() + " x  +  " + oggetti[i].Y.ToString() + " y  =  " + oggetti[i].Limite_Massimo.ToString();
+                stringa += "\n" + oggetti[i].X.ToString() + " x  +  " + oggetti[i].Y.ToString() + " y  >=  " + oggetti[i].Limite_Massimo.ToString();
             }
             Rette.Text = stringa;
         }
         private void mostraRetta(double x, double y, double k)
         {
-            double x1 = -100;
-            double y1 = (k - (x1 * x)) / y;
-            double x2 = 800;
-            double y2 = (k - (x2 * x))/y;
+            double x1;
+            double x2;
+            double y1;
+            double y2;
+            if (y == 0)
+            {
+                x1 = x;
+                y1 = 1000;
+                x2 = x1;
+                y2 = -500;
+            }
+            else
+            {
+                x1 = -100;
+                y1 = (k - (x1 * x)) / y;
+                x2 = 800;
+                y2 = (k - (x2 * x)) / y;
+            }
             Line linea = new Line();
             linea.X1 = x1 + 100;
             linea.Y1 = -(y1 - 500);
@@ -99,34 +111,52 @@ namespace ProgrammazioneLineare
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             finestraGrafico.Show();
-            for(int i = 0; i < 800; i += 1)
+            for (int i = 0; i < finestraGrafico.grafico.Children.Count; i += 1)
             {
-                Line linea = new Line();
-                linea.X1 = i;
-                linea.Y1 = 0;
-                linea.X2 = i;
-                linea.Y2 = 600;
-                linea.Stroke = Brushes.Gray;
-                linea.StrokeThickness = .5;
-                finestraGrafico.grafico.Children.Add(linea);
+                //Line lineat = ((Line)finestraGrafico.grafico.Children[i]);
+                try
+                {
+                    if (((Line)finestraGrafico.grafico.Children[i]).Stroke == Brushes.Red)
+                    {
+                        finestraGrafico.grafico.Children.RemoveAt(i);
+                    }
+                }
+                catch { }
             }
-            for (int i = 0; i < 600; i += 1)
+            if (!graficoCaricato)
             {
-                Line linea = new Line();
-                linea.X1 = 0;
-                linea.Y1 = i;
-                linea.X2 = 800;
-                linea.Y2 = i;
-                linea.Stroke = Brushes.Gray;
-                linea.StrokeThickness = .5;
-                finestraGrafico.grafico.Children.Add(linea);
+                for (int i = 0; i < 800; i += 1)
+                {
+                    Line linea = new Line();
+                    linea.X1 = i;
+                    linea.Y1 = 0;
+                    linea.X2 = i;
+                    linea.Y2 = 600;
+                    linea.Stroke = Brushes.Gray;
+                    linea.StrokeThickness = .5;
+                    finestraGrafico.grafico.Children.Add(linea);
+                }
+                for (int i = 0; i < 600; i += 1)
+                {
+                    Line linea = new Line();
+                    linea.X1 = 0;
+                    linea.Y1 = i;
+                    linea.X2 = 800;
+                    linea.Y2 = i;
+                    linea.Stroke = Brushes.Gray;
+                    linea.StrokeThickness = .5;
+                    finestraGrafico.grafico.Children.Add(linea);
+                }
             }
             for(int i = 0; i < oggetti.Count; i += 1)
             {
                 mostraRetta(oggetti[i].X, oggetti[i].Y, oggetti[i].Limite_Massimo);
             }
-            //mostraRetta(1,2,10);
-            finestraGrafico.ingrandisci(20);
+            if (!graficoCaricato)
+            {
+                finestraGrafico.ingrandisci(20);
+                graficoCaricato = true;
+            }
         }
 
         private void Finestra_Closed(object sender, EventArgs e)

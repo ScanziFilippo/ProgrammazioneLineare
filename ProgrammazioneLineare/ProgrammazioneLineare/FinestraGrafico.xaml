@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProgrammazioneLineare"
         mc:Ignorable="d"
-        Title="FinestraGrafico" Height="615" Width="800" ResizeMode="NoResize">
+        Title="FinestraGrafico" Height="615" Width="800" ResizeMode="NoResize" Closing="Window_Closing">
     <Grid>
         <Canvas x:Name="grafico">
             <!--
