@@ -77,5 +77,10 @@ namespace ProgrammazioneLineare
             e.Cancel = true;
             this.Visibility = Visibility.Hidden;
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

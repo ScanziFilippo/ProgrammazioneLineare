@@ -1,6 +1,7 @@
 ﻿using BlurryControls.Controls;
 using BlurryControls.DialogFactory;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace ProgrammazioneLineare
         List<Oggetto> oggetti;
         FinestraGrafico finestraGrafico = new FinestraGrafico();
         bool graficoCaricato = false;
+        List<double[]> punti = new List<double[]>();
         public MainWindow()
         {
             InitializeComponent();
@@ -39,8 +41,8 @@ namespace ProgrammazioneLineare
             Rette.FontSize= 15;
             Rette.Text = "Equazioni delle rette";
             aggiornaTestoRette();
-        //Rette.Text = "Equazioni delle rette\nax + bx + c\nax + bx + c\nax + bx + c\nax + bx + c\n";
-        //Rette.Visibility = Visibility.Collapsed;
+            //Rette.Text = "Equazioni delle rette\nax + bx + c\nax + bx + c\nax + bx + c\nax + bx + c\n";
+            //Rette.Visibility = Visibility.Collapsed;
     }
         private List<Oggetto> LoadCollectionData()
         {
@@ -77,7 +79,7 @@ namespace ProgrammazioneLineare
             double y2;
             if (y == 0)
             {
-                x1 = x;
+                x1 = k/x;
                 y1 = 1000;
                 x2 = x1;
                 y2 = -500;
@@ -162,6 +164,47 @@ namespace ProgrammazioneLineare
         private void Finestra_Closed(object sender, EventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            calcolaPuntiIncrocio();
+        }
+
+        private void calcolaPuntiIncrocio()
+        {
+            punti.Clear();
+            for (int i = 0; i < oggetti.Count; i++)
+            {
+                if (oggetti[i].Y != 0)
+                {
+                    punti.Add(new double[] { 0, oggetti[i].Limite_Massimo / oggetti[i].Y });
+                }
+                if (oggetti[i].X != 0)
+                {
+                    punti.Add(new double[] { oggetti[i].Limite_Massimo / oggetti[i].X, 0 });
+                }
+                for (int j = 0; j < oggetti.Count; j++)
+                {
+                    if(i!=j)
+                    {
+                        if (oggetti[j].Y != 0 && oggetti[j].X != 0) {
+                            //MessageBox.Show(i + " " + j);
+                            if (oggetti[i].Y != 0 && oggetti[i].X != 0){
+                                double y = oggetti[j].Limite_Massimo / (oggetti[j].Y + (oggetti[j].X * ((oggetti[i].Limite_Massimo - oggetti[i].Y) / oggetti[i].X)));
+                                double x = (oggetti[i].Limite_Massimo - y * oggetti[i].Y) / oggetti[i].X;
+                                punti.Add(new double[] { x, y });
+                            }
+                        }
+                    }
+                }
+            }
+            String mostra = "Punti di incrocio:";
+            foreach (double[] p in punti)
+            {
+                mostra += "\n " + p[0] + ", " + p[1];
+            }
+            MessageBox.Show(mostra);
         }
     }
     public class Oggetto
