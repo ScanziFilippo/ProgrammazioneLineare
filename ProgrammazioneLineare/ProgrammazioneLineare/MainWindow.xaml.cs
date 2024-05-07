@@ -33,9 +33,14 @@ namespace ProgrammazioneLineare
         {
             InitializeComponent();
             oggetti = new List<Oggetto>();
-            oggetti.Add(new Oggetto() { Nome = "Ghiaccio", X = 1, Y = 2 , Limite_Massimo = 10});
+            /*oggetti.Add(new Oggetto() { Nome = "Ghiaccio", X = 1, Y = 2 , Limite_Massimo = 10});
             oggetti.Add(new Oggetto() { Nome = "Limone", X=5, Y = 3 , Limite_Massimo=7});
-            oggetti.Add(new Oggetto() { Nome = "Acqua", X=1, Y=0,Limite_Massimo=10});
+            oggetti.Add(new Oggetto() { Nome = "Acqua", X=1, Y=0,Limite_Massimo=10});*/
+            oggetti.Add(new Oggetto() { Nome = "A", X = .72, Y = .23, Limite_Massimo = 13 });
+            oggetti.Add(new Oggetto() { Nome = "B", X = 2, Y = .2, Limite_Massimo = 31 });
+            oggetti.Add(new Oggetto() { Nome = "C", X = 12, Y = 3, Limite_Massimo = 230 });
+            oggetti.Add(new Oggetto() { Nome = "D", X = .33, Y = .28, Limite_Massimo = 10 });
+
             //BindingOperations.EnableCollectionSynchronization(oggetti, _syncLock);
             Tabella.ItemsSource= LoadCollectionData();
             Rette.FontSize= 15;
@@ -154,9 +159,9 @@ namespace ProgrammazioneLineare
             {
                 mostraRetta(oggetti[i].X, oggetti[i].Y, oggetti[i].Limite_Massimo);
             }
+            finestraGrafico.ingrandisci(20);
             if (!graficoCaricato)
             {
-                finestraGrafico.ingrandisci(20);
                 graficoCaricato = true;
             }
         }
@@ -169,6 +174,13 @@ namespace ProgrammazioneLineare
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             calcolaPuntiIncrocio();
+            calcolaPuntiAmmessi();
+            //TODO calcolaZ();
+        }
+
+        private void calcolaPuntiAmmessi()
+        {
+            //punti
         }
 
         private void calcolaPuntiIncrocio()
@@ -178,23 +190,63 @@ namespace ProgrammazioneLineare
             {
                 if (oggetti[i].Y != 0)
                 {
-                    punti.Add(new double[] { 0, oggetti[i].Limite_Massimo / oggetti[i].Y });
+                    punti.Add(new double[] { 0, Math.Round(oggetti[i].Limite_Massimo / oggetti[i].Y, 3) });
                 }
                 if (oggetti[i].X != 0)
                 {
-                    punti.Add(new double[] { oggetti[i].Limite_Massimo / oggetti[i].X, 0 });
+                    punti.Add(new double[] { Math.Round(oggetti[i].Limite_Massimo / oggetti[i].X, 3), 0 });
                 }
                 for (int j = 0; j < oggetti.Count; j++)
                 {
                     if(i!=j)
                     {
                         if (oggetti[j].Y != 0 && oggetti[j].X != 0) {
-                            //MessageBox.Show(i + " " + j);
                             if (oggetti[i].Y != 0 && oggetti[i].X != 0){
-                                double y = oggetti[j].Limite_Massimo / (oggetti[j].Y + (oggetti[j].X * ((oggetti[i].Limite_Massimo - oggetti[i].Y) / oggetti[i].X)));
-                                double x = (oggetti[i].Limite_Massimo - y * oggetti[i].Y) / oggetti[i].X;
+                                double xSostituzione = -oggetti[i].Y / oggetti[i].X;
+                                double kSostituzione = oggetti[i].Limite_Massimo / oggetti[i].X;
+                                double y = (oggetti[j].Limite_Massimo - (kSostituzione * oggetti[j].X)) / (oggetti[j].Y + xSostituzione * oggetti[j].X);
+                                double x = (oggetti[i].Limite_Massimo - (oggetti[i].Y*y)) / oggetti[i].X;
+                                x = Math.Round(x, 3);
+                                y = Math.Round(y, 3);
+                                //if(x >= 0 && y >= 0)
+                                    punti.Add(new double[] { x, y });
+                            }
+                            else if (oggetti[i].Y == 0)
+                            {
+                                double x = oggetti[i].Limite_Massimo / oggetti[i].X;
+                                double y = (oggetti[j].Limite_Massimo - (oggetti[j].X*x))/ oggetti[j].Y;
+                                x = Math.Round(x, 3);
+                                y = Math.Round(y, 3);
+                                //if(x >= 0 && y >= 0)
                                 punti.Add(new double[] { x, y });
                             }
+                            else if (oggetti[i].X == 0)
+                            {
+                                double y = oggetti[i].Limite_Massimo / oggetti[i].Y;
+                                double x = (oggetti[j].Limite_Massimo - (oggetti[j].Y * y)) / oggetti[j].X;
+                                x = Math.Round(x, 3);
+                                y = Math.Round(y, 3);
+                                //if(x >= 0 && y >= 0)
+                                punti.Add(new double[] { x, y });
+                            }
+                        }
+                        else if (oggetti[j].Y == 0)
+                        {
+                            double x = oggetti[j].Limite_Massimo / oggetti[j].X;
+                            double y = (oggetti[i].Limite_Massimo - (oggetti[i].X * x)) / oggetti[i].Y;
+                            x = Math.Round(x, 3);
+                            y = Math.Round(y, 3);
+                            //if(x >= 0 && y >= 0)
+                            punti.Add(new double[] { x, y });
+                        }
+                        else if (oggetti[j].X == 0)
+                        {
+                            double y = oggetti[j].Limite_Massimo / oggetti[j].Y;
+                            double x = (oggetti[i].Limite_Massimo - (oggetti[i].Y * y)) / oggetti[i].X;
+                            x = Math.Round(x, 3);
+                            y = Math.Round(y, 3);
+                            //if(x >= 0 && y >= 0)
+                            punti.Add(new double[] { x, y });
                         }
                     }
                 }

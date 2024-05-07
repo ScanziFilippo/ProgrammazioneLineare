@@ -31,7 +31,11 @@ namespace ProgrammazioneLineare
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            double fattore = 2;
+            rimpicciolisci(2);
+        }
+        public void rimpicciolisci(double fattore)
+        {
+            //double fattore = 2;
             double offsetX = 50;
             double offsetY = 250;
             for (int i = 0; i < grafico.Children.Count; i++)
@@ -74,6 +78,7 @@ namespace ProgrammazioneLineare
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            rimpicciolisci(20);
             e.Cancel = true;
             this.Visibility = Visibility.Hidden;
         }
