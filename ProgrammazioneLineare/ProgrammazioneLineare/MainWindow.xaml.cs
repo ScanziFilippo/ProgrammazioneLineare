@@ -120,21 +120,38 @@ namespace ProgrammazioneLineare
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             finestraGrafico.Show();
-            for (int i = 0; i < finestraGrafico.grafico.Children.Count; i += 1)
+            foreach (UIElement l in finestraGrafico.grafico.Children.Cast<UIElement>().ToList())
             {
                 //Line lineat = ((Line)finestraGrafico.grafico.Children[i]);
                 try
                 {
-                    if (((Line)finestraGrafico.grafico.Children[i]).Stroke == Brushes.Red)
-                    {
-                        finestraGrafico.grafico.Children.RemoveAt(i);
-                    }
+                    //if (((Line)l).Stroke == Brushes.Red)
+                        finestraGrafico.grafico.Children.Remove(l);
                 }
                 catch { }
             }
-            if (!graficoCaricato)
-            {
-                for (int i = 0; i < 800; i += 1)
+            /*if (!graficoCaricato)
+            {*/
+            Line asseX = new Line();
+            asseX.X1 = 0;
+            asseX.Y1 = 500;
+            asseX.X2 = 800;
+            asseX.Y2 = 500;
+            asseX.Stroke = Brushes.DarkSlateGray;
+            asseX.StrokeThickness = 3;
+            finestraGrafico.grafico.Children.Add(asseX);
+
+            Line asseY = new Line();
+            asseY.X1 = 100;
+            asseY.Y1 = 0;
+            asseY.X2 = 100;
+            asseY.Y2 = 600;
+            asseY.Stroke = Brushes.DarkSlateGray;
+            asseY.StrokeThickness = 3;
+            finestraGrafico.grafico.Children.Add(asseY);
+
+
+            for (int i = 0; i < 800; i += 1)
                 {
                     Line linea = new Line();
                     linea.X1 = i;
@@ -156,7 +173,7 @@ namespace ProgrammazioneLineare
                     linea.StrokeThickness = .5;
                     finestraGrafico.grafico.Children.Add(linea);
                 }
-            }
+            //}
             for(int i = 0; i < oggetti.Count; i += 1)
             {
                 mostraRetta(oggetti[i].X, oggetti[i].Y, oggetti[i].Limite_Massimo);

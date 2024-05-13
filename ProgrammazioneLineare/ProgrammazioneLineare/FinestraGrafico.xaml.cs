@@ -19,6 +19,7 @@ namespace ProgrammazioneLineare
     /// </summary>
     public partial class FinestraGrafico : Window
     {
+        double ingrandimentoRelativo = 0;
         public FinestraGrafico()
         {
             InitializeComponent();
@@ -50,6 +51,7 @@ namespace ProgrammazioneLineare
                     ((Line)grafico.Children[i]).X2 += offsetX;
                     ((Line)grafico.Children[i]).Y2 /= fattore;
                     ((Line)grafico.Children[i]).Y2 += offsetY;
+                    ingrandimentoRelativo -= fattore;
                 }
                 catch { }
             }
@@ -71,6 +73,7 @@ namespace ProgrammazioneLineare
                     ((Line)grafico.Children[i]).X2 -= offsetX;
                     ((Line)grafico.Children[i]).Y2 *= fattore;
                     ((Line)grafico.Children[i]).Y2 -= offsetY;
+                    ingrandimentoRelativo += fattore;
                 }
                 catch { }
             }
@@ -79,7 +82,7 @@ namespace ProgrammazioneLineare
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
-            rimpicciolisci(20);
+            rimpicciolisci(ingrandimentoRelativo);
             this.Visibility = Visibility.Hidden;
         }
 
