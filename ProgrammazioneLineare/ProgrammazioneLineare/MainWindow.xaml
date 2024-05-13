@@ -36,7 +36,11 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0"></StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Label Foreground="White" FontSize="16">Formula obiettivo:</Label>
+            <TextBox x:Name="Formula">20x+12.5y</TextBox>
+            <Label Foreground="White" FontSize="16">Vincoli:</Label>
+        </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1">
             <Grid HorizontalAlignment="Center">
                 <!--<Button Content="Button" Width="76" Height="32"
@@ -55,7 +59,7 @@
                 </DataGrid>
                 <TextBlock IsHitTestVisible="False" x:Name="Rette" Padding="500 0 0 0" HorizontalAlignment="Center" Text="Esempio"/>
             </Grid>
-            <ComboBox Margin="5" Text="TextBox" Width="120" Background="White">
+            <ComboBox x:Name="Tipo" Margin="5" Text="TextBox" Width="120" Background="White">
                 <ComboBoxItem Content="Massimizza" IsSelected="True"/>
                 <ComboBoxItem Content="Minimizza"/>
             </ComboBox>

@@ -78,8 +78,8 @@ namespace ProgrammazioneLineare
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            rimpicciolisci(20);
             e.Cancel = true;
+            rimpicciolisci(20);
             this.Visibility = Visibility.Hidden;
         }
 

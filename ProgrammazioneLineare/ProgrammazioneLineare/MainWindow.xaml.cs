@@ -4,8 +4,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -175,12 +177,129 @@ namespace ProgrammazioneLineare
         {
             calcolaPuntiIncrocio();
             calcolaPuntiAmmessi();
-            //TODO calcolaZ();
+            calcolaZ();
+        }
+
+        private void calcolaZ()
+        {
+            String formula = Formula.Text;
+            Match match = Regex.Match(formula, @"(?<x>-?\d+(\.\d+)?)x\s*\+\s*(?<y>-?\d+(\.\d+)?)y");
+
+            if (match.Success)
+            {
+                double x = double.Parse(match.Groups["x"].Value, CultureInfo.InvariantCulture);
+                double y = double.Parse(match.Groups["y"].Value, CultureInfo.InvariantCulture);
+                double massimo = 0;
+                double minimo = double.PositiveInfinity;
+                double[] puntoMassimo = { 0, 0 };
+                foreach(double[] p in punti)
+                {
+                    double z = (x * p[0]) + (y * p[1]);
+                    //MessageBox.Show(p[0] + " " + p[1] + "\n fanno z "+ z);
+                    if (Tipo.Text == "Massimizza")
+                    {
+                        if (z > massimo)
+                        {
+                            massimo = z;
+                            puntoMassimo = p;
+                        }
+                    }
+                    else
+                    {
+                        if (z < minimo)
+                        {
+                            minimo = z;
+                            puntoMassimo = p;
+                        }
+                    }
+                }
+                //MessageBox.Show(x + " " + y);
+                if (Tipo.Text == "Massimizza")
+                    MessageBox.Show("Il valore ottimale per l'ottimizzazione è \nX: " + puntoMassimo[0] + " \nY: " + puntoMassimo[1] + "\nZ: " + massimo);
+                else
+                    MessageBox.Show("Il valore ottimale per l'ottimizzazione è \nX: " + puntoMassimo[0] + " \nY: " + puntoMassimo[1] + "\nZ: " + minimo);
+                //Console.WriteLine($"x: {x}, y: {y}");
+            }
+            else
+            {
+                MessageBox.Show("Formula obiettivo sbagliata, digitare come questo esempio: 3.5x + 5y");
+            }
         }
 
         private void calcolaPuntiAmmessi()
         {
-            //punti
+            String rimossi = "Punti rimossi ";
+            String feedback = "";
+            foreach(double[] punto in punti.ToList())
+            {
+                double x = punto[0];
+                double y = punto[1];
+                if(x < 0 || y < 0)
+                {
+                    punti.Remove(punto);
+                }
+                foreach(Oggetto retta in oggetti)
+                {
+                    double yN = -((retta.X * x) - retta.Limite_Massimo) / retta.Y;
+                    feedback += x + " " + y + " e " + x + " " + yN +"\n";
+                    if (Tipo.Text == "Massimizza")
+                    {
+                        if (yN > 0 && yN <= y)
+                        {
+                            rimossi += x + " " + y;
+                            punti.Remove(punto);
+                        }
+                    }
+                    else
+                    {
+                        if (yN > 0 && yN >= y)
+                        {
+                            rimossi += x + " " + y;
+                            punti.Remove(punto);
+                        }
+                    }
+                }
+                //MessageBox.Show(feedback);
+                feedback = "";
+            }
+            foreach (double[] punto in punti.ToList())
+            {
+                double x = punto[0];
+                double y = punto[1];
+                if (y == 0)
+                {
+                    foreach (double[] p in punti.ToList())
+                    {
+                        if (Tipo.Text == "Massimizza")
+                        {
+                            if (p[1] == 0 && x > p[0])
+                            {
+                                punti.Remove(punto);
+                            }
+                        }
+                        else{
+                            if (p[1] == 0 && x < p[0])
+                            {
+                                punti.Remove(punto);
+                            }
+                        }
+                    }
+                }
+            }
+            String mostra = "Punti di incrocio validi:";
+            /*punti = punti.Distinct().ToList<double[]>();
+            punti.GroupBy(x => x).Select(d => d.First()).ToList();
+            punti.Union(punti).ToList();
+            punti.Cast<double>().Distinct();*/
+            HashSet<double[]> set = new HashSet<double[]>(punti, new DoubleArrayComparer());
+            punti = set.ToList();
+            foreach (double[] p in punti)
+            {
+                mostra += "\n " + p[0] + ", " + p[1];
+            }
+            mostra += "\n\n " + punti.Count();
+            //MessageBox.Show(rimossi);
+            //MessageBox.Show(mostra);
         }
 
         private void calcolaPuntiIncrocio()
@@ -256,7 +375,7 @@ namespace ProgrammazioneLineare
             {
                 mostra += "\n " + p[0] + ", " + p[1];
             }
-            MessageBox.Show(mostra);
+            //MessageBox.Show(mostra);
         }
     }
     public class Oggetto
@@ -268,5 +387,17 @@ namespace ProgrammazioneLineare
         public double Y { get; set; }
 
         public double Limite_Massimo { get; set; }
+    }
+}
+public class DoubleArrayComparer : IEqualityComparer<double[]>
+{
+    public bool Equals(double[] x, double[] y)
+    {
+        return x.SequenceEqual(y);
+    }
+
+    public int GetHashCode(double[] obj)
+    {
+        return obj[0].GetHashCode() ^ obj[1].GetHashCode();
     }
 }
